@@ -85,6 +85,7 @@ function blockKatex(options, renderer) {
   };
 }
 
+// 修改后
 export function MDKatex(options = {}) {
   return {
     extensions: [
@@ -92,4 +93,4 @@ export function MDKatex(options = {}) {
       blockKatex(options, createRenderer(true)),
     ],
   };
-};
+}

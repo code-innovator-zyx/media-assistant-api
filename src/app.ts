@@ -1,8 +1,6 @@
 // src/app.ts
-
-import 'module-alias/register';
 import express from 'express';
-import { router } from './router/index';
+import { router } from '@/router/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

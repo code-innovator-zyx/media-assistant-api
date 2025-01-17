@@ -1,8 +1,8 @@
-import type { MarkdownToHtmlRequest, MarkdownToHtmlResponse } from "@/models/markdown";
+import type { MarkdownToHtmlRequest, MarkdownToHtmlResponse } from "@/models/markdown.js";
 import { marked } from "marked";
-import { initRenderer } from "@/utils/renderer";
-import { customCssWithTemplate, css2json, customizeTheme } from "@/utils";
-import { themeMap } from "@/config/theme";
+import { initRenderer } from "@/utils/renderer.js";
+import { customCssWithTemplate, css2json, customizeTheme } from "@/utils/index.js";
+import { themeMap } from "@/config/theme.js";
 import fs from 'node:fs'
 import path from 'node:path'
 const render = initRenderer({
@@ -48,7 +48,7 @@ async function markdownToHtml(request: MarkdownToHtmlRequest): Promise<MarkdownT
   html = render.createContainer(html)
   return {
     html: render.exportHTML(html, '#0F4C81'),
-    code: 0,
+    code: 200,
     message: "success"
   }
 }

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { markdownToHtml } from "@/handler/markdown";
+import { markdownToHtml } from "@/handler/markdown.js";
 const markdownRouter = Router();
 
 // 在这里定义您的路由

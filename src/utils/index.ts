@@ -1,13 +1,7 @@
-import type { Block, ExtendedProperties, Inline, Theme } from '@/types/index'
+import type { Block, ExtendedProperties, Inline, Theme } from '@/types/index.js'
 import type { PropertiesHyphen } from 'csstype'
-// import { prefix } from '@/config'
 
 import juice from 'juice'
-import * as prettierPluginBabel from 'prettier/plugins/babel'
-import * as prettierPluginEstree from 'prettier/plugins/estree'
-import * as prettierPluginMarkdown from 'prettier/plugins/markdown'
-import * as prettierPluginCss from 'prettier/plugins/postcss'
-import { format } from 'prettier/standalone'
 
 const prefix = `MD`
 export function addPrefix(str: string) {
@@ -143,24 +137,24 @@ export function getStyleString(style: ExtendedProperties) {
   return Object.entries(style ?? {}).map(([key, value]) => `${key}: ${value}`).join(`; `)
 }
 
-/**
- * 格式化内容
- * @param {string} content - 要格式化的内容
- * @param {'markdown' | 'css'} [type] - 内容类型，决定使用的解析器，默认为'markdown'
- * @returns {Promise<string>} - 格式化后的内容
- */
-export async function formatDoc(content: string, type: `markdown` | `css` = `markdown`) {
-  const plugins = {
-    markdown: [prettierPluginMarkdown, prettierPluginBabel, prettierPluginEstree],
-    css: [prettierPluginCss],
-  }
+// /**
+//  * 格式化内容
+//  * @param {string} content - 要格式化的内容
+//  * @param {'markdown' | 'css'} [type] - 内容类型，决定使用的解析器，默认为'markdown'
+//  * @returns {Promise<string>} - 格式化后的内容
+//  */
+// export async function formatDoc(content: string, type: `markdown` | `css` = `markdown`) {
+//   const plugins = {
+//     markdown: [prettierPluginMarkdown, prettierPluginBabel, prettierPluginEstree],
+//     css: [prettierPluginCss],
+//   }
 
-  const parser = type in plugins ? type : `markdown`
-  return await format(content, {
-    parser,
-    plugins: plugins[parser],
-  })
-}
+//   const parser = type in plugins ? type : `markdown`
+//   return await format(content, {
+//     parser,
+//     plugins: plugins[parser],
+//   })
+// }
 
 function setStyles(element: Element) {
   console.log(element.innerHTML)

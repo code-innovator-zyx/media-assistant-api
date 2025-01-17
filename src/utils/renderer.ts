@@ -1,12 +1,12 @@
 import { marked, RendererObject, Tokens } from "marked";
 import type { PropertiesHyphen } from 'csstype'
-import { MDKatex } from '@/utils/MDKatex'
-import type { IOpts, ThemeStyles, ExtendedProperties } from "@/types";
+import {MDKatex} from './MDKatex.js'
+import type { IOpts, ThemeStyles, ExtendedProperties } from "@/types/index.js";
 import { cloneDeep, toMerged } from "es-toolkit";
-import { getStyleString } from "@/utils";
+import { getStyleString } from "./index.js";
 import mermaid from 'mermaid'
 import hljs from 'highlight.js'
-import markedAlert from "@/utils/MDAlert"
+import markedAlert from "./MDAlert.js"
 
 
 /**

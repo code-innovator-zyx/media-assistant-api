@@ -7,7 +7,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc && tsc-alias",
     "start": "node dist/app.js",
     "dev": "nodemon --exec \"npx tsx\" src/app.ts"
   },
@@ -19,7 +19,6 @@
     "juice": "^11.0.0",
     "marked": "^15.0.6",
     "mermaid": "^11.4.1",
-    "module-alias": "^2.2.3",
     "prettier": "^3.4.2",
     "reading-time": "^1.5.0",
     "typescript": "^5.7.3"
@@ -28,6 +27,7 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10"
   }
 }

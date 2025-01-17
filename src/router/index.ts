@@ -1,5 +1,5 @@
 import express from "express";
-import { markdownRouter } from "@/router/markdown";
+import { markdownRouter } from "@/router/markdown.js";
 
 const router = express.Router();
 
