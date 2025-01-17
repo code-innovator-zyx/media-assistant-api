@@ -2,6 +2,9 @@
 
 一个强大的 Markdown 转 HTML 的 API 服务，专注于提供美观、可定制的内容转换能力。
 
+最近自己在做一些自动化自媒体，习惯了markdown编写文档，但是markdown转html的工具很少，所以自己写了一个，可以在线预览，也可以本地部署。这里分享给大家的是一个api服务，可以通过api调用转换markdown为html。
+
+[在线转换地址](https://md.openwrite.cn/)
 ## ✨ 特性
 
 - 🎨 支持自定义主题样式
@@ -36,7 +39,7 @@ pnpm dev
 
 # 生产环境
 pnpm build
-npm start
+pnpm start
 ```
 
 ## 📦 API 使用
@@ -53,7 +56,7 @@ Content-Type: application/json
 }
 ```
 
-### 下载示例
+### 预览案例
 
 ```http
 GET /md/download
