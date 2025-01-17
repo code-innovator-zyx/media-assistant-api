@@ -1,0 +1,130 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="50" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JupyterPackageInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="96">
+            <item index="0" class="java.lang.String" itemvalue="pillow" />
+            <item index="1" class="java.lang.String" itemvalue="grpcio" />
+            <item index="2" class="java.lang.String" itemvalue="grpcio-tools" />
+            <item index="3" class="java.lang.String" itemvalue="protobuf" />
+            <item index="4" class="java.lang.String" itemvalue="pydantic" />
+            <item index="5" class="java.lang.String" itemvalue="pymongo" />
+            <item index="6" class="java.lang.String" itemvalue="etcd3" />
+            <item index="7" class="java.lang.String" itemvalue="orjson" />
+            <item index="8" class="java.lang.String" itemvalue="redis" />
+            <item index="9" class="java.lang.String" itemvalue="tqdm" />
+            <item index="10" class="java.lang.String" itemvalue="schedule" />
+            <item index="11" class="java.lang.String" itemvalue="fastapi" />
+            <item index="12" class="java.lang.String" itemvalue="python-json-logger" />
+            <item index="13" class="java.lang.String" itemvalue="uvicorn" />
+            <item index="14" class="java.lang.String" itemvalue="esdk-obs-python" />
+            <item index="15" class="java.lang.String" itemvalue="transformers" />
+            <item index="16" class="java.lang.String" itemvalue="emoji" />
+            <item index="17" class="java.lang.String" itemvalue="torch" />
+            <item index="18" class="java.lang.String" itemvalue="gputil" />
+            <item index="19" class="java.lang.String" itemvalue="psutil" />
+            <item index="20" class="java.lang.String" itemvalue="scipy" />
+            <item index="21" class="java.lang.String" itemvalue="numpy" />
+            <item index="22" class="java.lang.String" itemvalue="requests" />
+            <item index="23" class="java.lang.String" itemvalue="tzlocal" />
+            <item index="24" class="java.lang.String" itemvalue="greenlet" />
+            <item index="25" class="java.lang.String" itemvalue="tabulate" />
+            <item index="26" class="java.lang.String" itemvalue="PyYAML" />
+            <item index="27" class="java.lang.String" itemvalue="python-dateutil" />
+            <item index="28" class="java.lang.String" itemvalue="Click" />
+            <item index="29" class="java.lang.String" itemvalue="MarkupSafe" />
+            <item index="30" class="java.lang.String" itemvalue="opencv-python-headless" />
+            <item index="31" class="java.lang.String" itemvalue="eventlet" />
+            <item index="32" class="java.lang.String" itemvalue="XlsxWriter" />
+            <item index="33" class="java.lang.String" itemvalue="monotonic" />
+            <item index="34" class="java.lang.String" itemvalue="itsdangerous" />
+            <item index="35" class="java.lang.String" itemvalue="pymilvus" />
+            <item index="36" class="java.lang.String" itemvalue="Flask" />
+            <item index="37" class="java.lang.String" itemvalue="coverage" />
+            <item index="38" class="java.lang.String" itemvalue="dnspython" />
+            <item index="39" class="java.lang.String" itemvalue="six" />
+            <item index="40" class="java.lang.String" itemvalue="Werkzeug" />
+            <item index="41" class="java.lang.String" itemvalue="vptree" />
+            <item index="42" class="java.lang.String" itemvalue="gunicorn" />
+            <item index="43" class="java.lang.String" itemvalue="Flask-SQLAlchemy" />
+            <item index="44" class="java.lang.String" itemvalue="APScheduler" />
+            <item index="45" class="java.lang.String" itemvalue="Flask-APScheduler" />
+            <item index="46" class="java.lang.String" itemvalue="docxtpl" />
+            <item index="47" class="java.lang.String" itemvalue="pytz" />
+            <item index="48" class="java.lang.String" itemvalue="onnxruntime-gpu" />
+            <item index="49" class="java.lang.String" itemvalue="thop" />
+            <item index="50" class="java.lang.String" itemvalue="insightface" />
+            <item index="51" class="java.lang.String" itemvalue="ptflops" />
+            <item index="52" class="java.lang.String" itemvalue="matplotlib" />
+            <item index="53" class="java.lang.String" itemvalue="onnx" />
+            <item index="54" class="java.lang.String" itemvalue="Pillow" />
+            <item index="55" class="java.lang.String" itemvalue="openpyxl" />
+            <item index="56" class="java.lang.String" itemvalue="pika" />
+            <item index="57" class="java.lang.String" itemvalue="torchvision" />
+            <item index="58" class="java.lang.String" itemvalue="opencv-contrib-python" />
+            <item index="59" class="java.lang.String" itemvalue="np" />
+            <item index="60" class="java.lang.String" itemvalue="certifi" />
+            <item index="61" class="java.lang.String" itemvalue="charset-normalizer" />
+            <item index="62" class="java.lang.String" itemvalue="pycryptodome" />
+            <item index="63" class="java.lang.String" itemvalue="urllib3" />
+            <item index="64" class="java.lang.String" itemvalue="idna" />
+            <item index="65" class="java.lang.String" itemvalue="retry" />
+            <item index="66" class="java.lang.String" itemvalue="pandas" />
+            <item index="67" class="java.lang.String" itemvalue="pyyaml" />
+            <item index="68" class="java.lang.String" itemvalue="PyJWT" />
+            <item index="69" class="java.lang.String" itemvalue="more-itertools" />
+            <item index="70" class="java.lang.String" itemvalue="python-multipart" />
+            <item index="71" class="java.lang.String" itemvalue="xlsxwriter" />
+            <item index="72" class="java.lang.String" itemvalue="PyMuPDF" />
+            <item index="73" class="java.lang.String" itemvalue="flashtext" />
+            <item index="74" class="java.lang.String" itemvalue="pymysql" />
+            <item index="75" class="java.lang.String" itemvalue="opentelemetry-exporter-otlp-proto-grpc" />
+            <item index="76" class="java.lang.String" itemvalue="opentelemetry-api" />
+            <item index="77" class="java.lang.String" itemvalue="opentelemetry-sdk" />
+            <item index="78" class="java.lang.String" itemvalue="autopep8" />
+            <item index="79" class="java.lang.String" itemvalue="fake-useragent" />
+            <item index="80" class="java.lang.String" itemvalue="lxml" />
+            <item index="81" class="java.lang.String" itemvalue="pycodestyle" />
+            <item index="82" class="java.lang.String" itemvalue="pyexecjs" />
+            <item index="83" class="java.lang.String" itemvalue="toml" />
+            <item index="84" class="java.lang.String" itemvalue="loguru" />
+            <item index="85" class="java.lang.String" itemvalue="w3lib" />
+            <item index="86" class="java.lang.String" itemvalue="streamlit-elements" />
+            <item index="87" class="java.lang.String" itemvalue="streamlit_pandas_profiling" />
+            <item index="88" class="java.lang.String" itemvalue="Faker" />
+            <item index="89" class="java.lang.String" itemvalue="reloading" />
+            <item index="90" class="java.lang.String" itemvalue="streamlit" />
+            <item index="91" class="java.lang.String" itemvalue="streamlit_local_storage" />
+            <item index="92" class="java.lang.String" itemvalue="st-pages" />
+            <item index="93" class="java.lang.String" itemvalue="zhipuai" />
+            <item index="94" class="java.lang.String" itemvalue="alibabacloud-alimt20181012" />
+            <item index="95" class="java.lang.String" itemvalue="webdriver-manager" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="tuple.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

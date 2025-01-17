@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ff7a80e8-ac2e-4319-8176-8e8c47f62854" name="tengxun">
+        <fileTransfer rootFolder="/home/ubuntu/workspace/md-api" accessType="SFTP" host="175.24.235.123" port="22" sshConfigId="90e86111-de46-4774-9ab1-7fc593fec6cb" sshConfig="ubuntu@175.24.235.123:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
