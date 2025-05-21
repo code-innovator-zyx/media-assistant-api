@@ -12,6 +12,7 @@ import { JSDOM } from 'jsdom';
 
 export class MarkdownService {
     private static instance: MarkdownService;
+    private static codeThemeStylesCache: Map<string, string> = new Map();
     private footnotes: [number, string, string][] = [];
     private footnoteIndex: number = 0;
     private styleMapping: ThemeStyles;
@@ -53,10 +54,23 @@ export class MarkdownService {
     public static getInstance(options: IOpts): MarkdownService {
         if (!MarkdownService.instance) {
             console.log("new instance");
-
             MarkdownService.instance = new MarkdownService(options);
+        } else {
+            // 更新现有实例的配置
+            MarkdownService.instance.updateConfig(options);
         }
         return MarkdownService.instance;
+    }
+
+    // 添加更新配置的方法
+    private updateConfig(options: IOpts): void {
+        this.opts = options;
+        this.styleMapping = this.buildTheme(options);
+        this.initializeMarked(); // 重新初始化 marked 以应用新的样式
+        this.footnotes = [];
+        this.footnoteIndex = 0;
+        this.codeIndex = 0;
+        this.listIndex = 0;
     }
 
     private initializeMarked(): void {
@@ -303,21 +317,39 @@ export class MarkdownService {
         `;
     }
 
-    public exportHTML(htmlContent: string, primaryColor: string): string {
+    public async exportHTML(htmlContent: string, primaryColor: string): Promise<string> {
         const document = this.dom.window.document;
         document.querySelector('#output')!.innerHTML = htmlContent;
         const element = document.querySelector('#output')!;
-
-        // const cssContent = fs.readFileSync('path/to/codeTheme.css', 'utf-8');
 
         // 处理颜色变量
         const htmlStr = element.innerHTML
             .replaceAll('var(--md-primary-color)', primaryColor)
             .replaceAll(/--md-primary-color:.+?;/g, '');
-        //              // <link rel="stylesheet" href="${this.opts.codeTheme}" />
+
+        // 下载并内联样式，使用缓存
+        let codeThemeStyles = '';
+        try {
+            if (this.opts.codeTheme) {
+                // 检查缓存中是否已有该主题样式
+                if (MarkdownService.codeThemeStylesCache.has(this.opts.codeTheme)) {
+                    codeThemeStyles = MarkdownService.codeThemeStylesCache.get(this.opts.codeTheme) || '';
+                    console.log('Using cached code theme styles');
+                } else {
+                    // 如果缓存中没有，则下载并缓存
+                    const response = await fetch(this.opts.codeTheme);
+                    codeThemeStyles = await response.text();
+                    MarkdownService.codeThemeStylesCache.set(this.opts.codeTheme, codeThemeStyles);
+                    console.log('Downloaded and cached code theme styles');
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching code theme styles:', error);
+        }
+
         return `<html><head>
             <meta charset="utf-8" />
-            <style>.hljs{background:#1c1d21;color:#c0c5ce}.hljs-comment,.hljs-quote{color:#b6b18b}.hljs-deletion,.hljs-name,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-tag,.hljs-template-variable,.hljs-variable{color:#eb3c54}.hljs-built_in,.hljs-link,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#e7ce56}.hljs-attribute{color:#ee7c2b}.hljs-addition,.hljs-bullet,.hljs-string,.hljs-symbol{color:#4fb4d7}.hljs-section,.hljs-title{color:#78bb65}.hljs-keyword,.hljs-selector-tag{color:#b45ea4}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}</style>
+            <style>${codeThemeStyles}</style>
             </head>
             <body><div style="width: 750px; margin: auto;">${htmlStr}</div></body></html>`;
     }

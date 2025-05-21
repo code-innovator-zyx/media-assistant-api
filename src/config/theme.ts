@@ -350,7 +350,7 @@ const graceTheme = toMerged(defaultTheme, {
     },
 
     'code': {
-      'white-space': `pre-wrap`,
+      'white-space': `nowrap`,
       'font-family': `'Fira Code', Menlo, Operator Mono, Consolas, Monaco, monospace`,
     },
 

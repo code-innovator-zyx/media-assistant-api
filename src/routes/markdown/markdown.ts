@@ -8,7 +8,7 @@ markdownRouter.post("/html", async (req, res) => {
     res.json(response);
 });
 
-markdownRouter.get("/download", (_, res) => {
+markdownRouter.get("/download", (req, res) => {
     try {
         const aiProductSummary = `
 > 今天为你带来全球最新的AI产品汇总，每一款都能手把手指导你如何实现收入增长！从网站建设到内容营销，从音乐创作到社交管理，这些AI工具将彻底改变你的副业玩法。快来看看这些创新科技如何助你轻松开启财富之路！  (排行来源于官方真实数据)
@@ -45,16 +45,39 @@ https://www.producthunt.com/r/G6KIXQ3NRL6UMC?utm_campaign=producthunt-api&utm_me
 \`\`\`
 > 在这个快速发展的AI时代，抓住机遇、善用这些工具，将为你的副业带来无限可能。每一款产品都蕴含着让你收入倍增的潜力，你准备好行动了吗？让我们一起探索这些科技背后的财富密码，开启你的副业新篇章！
 `;
-        res.setHeader(`Content-Type`, `text/html`)
-        markdownToHtml({ data: aiProductSummary, isMacCodeBlock: true }).then(content => {
-            res.send(content.html)
+        res.setHeader(`Content-Type`, `text/html`);
+
+        // 从查询参数中获取配置
+        const options = {
+            data: aiProductSummary,
+            isMacCodeBlock: req.query.isMacCodeBlock === 'true',
+            // 添加其他可选配置
+            theme: req.query.theme as string,
+            fontFamily: req.query.fontFamily as string,
+            fontSize: req.query.fontSize as string,
+            isUseIndent: req.query.isUseIndent === 'true',
+            primaryColor: req.query.primaryColor as string,
+            citeStatus: req.query.citeStatus === 'true',
+            legend: req.query.legend as string,
+            codeTheme: req.query.codeTheme as string
+        };
+
+        // 移除所有未定义的属性
+        Object.keys(options).forEach(key => {
+            if (options[key as keyof typeof options] === undefined) {
+                delete options[key as keyof typeof options];
+            }
+        });
+
+        markdownToHtml(options).then(content => {
+            res.send(content.html);
         }, (error) => {
-            res.status(500).json({ error: (error as Error).message })
-        })
+            res.status(500).json({ error: (error as Error).message });
+        });
     }
     catch (error) {
-        res.status(500).json({ error: (error as Error).message })
+        res.status(500).json({ error: (error as Error).message });
     }
-})
+});
 
 export { markdownRouter };
