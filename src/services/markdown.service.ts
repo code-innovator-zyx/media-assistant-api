@@ -3,7 +3,7 @@ import { MDKatex } from '@/utils/MDKatex.js';
 import markedAlert from "@/utils/MDAlert.js";
 import { ThemeStyles, IOpts, ExtendedProperties } from "@/types/index.js";
 import { escapeHtml, getStyles } from "@/utils/helpers.js";
-import { mermaidRenderer } from "./renderers/MermaidRenderer";
+import { mermaidRenderer } from "./renderers/MermaidRenderer.js";
 import { codeRenderer } from "./renderers/CodeRenderer.js";
 import { cloneDeep, toMerged } from "es-toolkit";
 import type { PropertiesHyphen } from 'csstype';

@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-import { MarkdownService } from '@/services/markdown.service';
-import { AppError } from '@/middleware/errorHandler';
+import { MarkdownService } from '@/services/markdown.service.js';
+import { AppError } from '@/middleware/errorHandler.js';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import type { MarkdownToHtmlRequest } from '@/types/markdown';
-import { config } from '@/config/config';
-import { theme } from '@/config/theme';
-import { fontFamily, fontSize } from '@/config/style';
-import { FontFamilyLabel, FontSizeLabel } from '@/types/index';
+import type { MarkdownToHtmlRequest } from '@/types/markdown.js';
+import { config } from '@/config/config.js';
+import { theme } from '@/config/theme.js';
+import { fontFamily, fontSize } from '@/config/style.js';
+import { FontFamilyLabel, FontSizeLabel } from '@/types/index.js';
 
 export class MarkdownController {
     private static instance: MarkdownController;

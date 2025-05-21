@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { markdownRouter } from './markdown/markdown';
+import { markdownRouter } from './markdown/markdown.js';
 
 const routes = Router();
 

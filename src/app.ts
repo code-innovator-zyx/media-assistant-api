@@ -2,8 +2,8 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { errorHandler } from '@/middleware/errorHandler';
-import { requestLogger } from '@/middleware/requestLogger';
+import { errorHandler } from '@/middleware/errorHandler.js';
+import { requestLogger } from '@/middleware/requestLogger.js';
 import { routes } from '@/routes/index.js';
 import { config } from '@/config/index.js';
 
