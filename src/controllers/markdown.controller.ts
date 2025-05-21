@@ -41,7 +41,7 @@ export class MarkdownController {
         }
     }
 
-    private stringToFontSizeLabel(value: string): FontSizeLabel {
+    private stringToFontSizeLabel(value: string): FontSizeLabel | string {
         switch (value) {
             case "12px":
                 return FontSizeLabel.XXSmall;
@@ -54,6 +54,10 @@ export class MarkdownController {
             case "16px":
                 return FontSizeLabel.Large;
             default:
+                // 检查是否是有效的像素值（如：18px）
+                if (/^\d+px$/.test(value)) {
+                    return value;
+                }
                 return config.fontSize as FontSizeLabel;
         }
     }
@@ -68,7 +72,8 @@ export class MarkdownController {
         // 处理字号参数
         let fontSizeValue = config.fontSize as FontSizeLabel;
         if (options.fontSize) {
-            fontSizeValue = this.stringToFontSizeLabel(options.fontSize);
+            const sizeValue = this.stringToFontSizeLabel(options.fontSize);
+            fontSizeValue = sizeValue as FontSizeLabel;
         }
 
         // 初始化 MarkdownService
@@ -102,7 +107,7 @@ export class MarkdownController {
 
             res.json({
                 status: 'success',
-                data: { html }
+                data: html
             });
         } catch (error) {
             next(error);

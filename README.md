@@ -1,5 +1,7 @@
 # Media Assistant API
 
+[English](README.en.md) | 简体中文
+
 一个强大的 Markdown 转 HTML 的 API 服务，专注于提供美观、可定制的内容转换能力。支持多种高级特性，让您的 Markdown 内容转换更加灵活和专业。
 
 [在线转换地址](https://md.openwrite.cn/)
@@ -9,20 +11,19 @@
 ### 🎨 功能增强
 - [x] 支持更多 Markdown 扩展语法
 - [x] 添加更多预设主题
+- [x] 支持动态样式切换
+- [x] 支持自定义字体
+- [x] 增加自定义 CSS 样式
+- [x] 支持自定义 Markdown 扩展语法
+- [x] 支持自定义主题样式
 - [x] 支持自定义代码高亮主题
 - [ ] 增加图片处理功能（压缩、水印等）
 - [ ] 支持导出 PDF 格式
 
-### 🔍 测试与质量
-- [ ] 增加单元测试覆盖率
-- [ ] 添加端到端测试
-- [ ] 引入性能基准测试
-- [x] 完善错误处理机制
-
 
 ### 📚 文档完善
 - [x] 添加详细的 API 使用示例
-- [x] 编写开发者贡献指南
+- [ ] 编写开发者贡献指南
 - [ ] 补充常见问题解答（FAQ）
 - [x] 添加在线演示环境
 
@@ -94,21 +95,21 @@ pnpm dev
 POST /markdown/html
 Content-Type: application/json
 
-请求体：
+// 请求体：
 {
   "data": "# Your Markdown Content",    // Markdown 内容（必填）
   "isMacCodeBlock": true,              // 是否启用 Mac 风格代码块（可选）
-  "theme": "经典",                    // 主题名称（可选）：经典、优雅
+  "theme": "default",                    // 主题名称（可选）：default、grace
   "fontFamily": "无衬线",              // 字体类型（可选）：无衬线、衬线、等宽
-  "fontSize": "15px",                 // 字号：12px-16px（可选）
+  "fontSize": "15px",                 // 字号：任意像素值  例: 14px
   "isUseIndent": true,                // 是否使用缩进（可选）
   "primaryColor": "#1890ff",          // 主色调（可选）
   "citeStatus": true,                 // 是否启用引用（可选）
   "legend": "只显示 title",           // 图例样式（可选）：title 优先、alt 优先、只显示 title、只显示 alt、不显示
-"codeTheme":"https://cdn.bootcdn.net/ajax/libs/highlight.js/11.10.0/styles/an-old-hope.min.css"              // 代码主题css 地址
+"codeTheme":"https://cdn.bootcdn.net/ajax/libs/highlight.js/11.10.0/styles/an-old-hope.min.css"// 代码主题css 地址
 }
 
-响应：
+//响应：
 {
   "status": "success",
   "data": {
@@ -126,14 +127,14 @@ GET /markdown/preview
 
 查询参数：
 - isMacCodeBlock: boolean  // 是否启用 Mac 风格代码块
-- theme: string           // 主题名称
-- fontFamily: string      // 字体类型
-- fontSize: string        // 字号
-- isUseIndent: boolean    // 是否使用缩进
-- primaryColor: string    // 主色调
-- citeStatus: boolean     // 是否启用引用
-- legend: string         // 图例样式
-- codeTheme: string      // 代码主题
+- theme: string           // 主题名称（可选）：default、grace
+- fontFamily: string      // 字体类型（可选）：无衬线、衬线、等宽
+- fontSize: string        // 字号：任意像素值  例: 14px
+- isUseIndent: boolean    // 是否使用缩进（可选）
+- primaryColor: string    // 主色调（可选）
+- citeStatus: boolean     // 是否启用引用（可选）
+- legend: string         // 图例样图例样式（可选）：title 优先、alt 优先、只显示 title、只显示 alt、不显示式
+- codeTheme: string      // 代码主题 使用css 下载地址
 
 响应：
 返回一个包含预览内容的 HTML 页面
@@ -153,7 +154,7 @@ NODE_ENV=development     # 运行环境
 
 ### 主题配置
 
-在 `src/config/theme.ts` 中可以自定义主题样式：
+在 `src/config/theme.ts` 中可以自定义默认的主题样式：
 
 ```typescript
 export const themes = {
@@ -166,6 +167,23 @@ export const themes = {
     // 暗黑主题配置
   }
 }
+```
+
+### 调用示例(以python为例)
+```python
+def parse_html(md: str):
+   # 选择你需要的参数
+    params = {
+        "data": md, "isMacCodeBlock": False,
+        "fontSize": '14px'
+    }
+    res = requests.post(
+        url="http://localhost:8080/api/markdown/html",
+        data=json.dumps(params),
+        headers={"Content-Type": "application/json"}
+    )
+    res.raise_for_status()
+    return res.json()["data"]
 ```
 
 ## 🤝 贡献指南

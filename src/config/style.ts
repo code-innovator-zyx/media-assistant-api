@@ -59,9 +59,19 @@ const fontSizeOptions: IConfigOption[] = [
 ]
 
 // 字体颜色
-export function fontSize(label: FontSizeLabel): IConfigOption {
-  const option = fontSizeOptions.find((item) => item.label === label)
-  return option ? option : fontSizeOptions[2]
+// 字体大小
+export function fontSize(label: FontSizeLabel | string): IConfigOption {
+    // 如果是自定义字号
+    if (typeof label === 'string' && /^\d+px$/.test(label)) {
+        return {
+            label: label,
+            value: label,
+            desc: '自定义'
+        };
+    }
+    // 如果是预设字号
+    const option = fontSizeOptions.find((item) => item.label === label);
+    return option ? option : fontSizeOptions[2];
 }
 
 
