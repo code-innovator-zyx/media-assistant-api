@@ -57,7 +57,7 @@ async function markdownToHtml(request: MarkdownToHtmlRequest): Promise<MarkdownT
     if (request.fontFamily) {
       fontFamilyValue = stringToFontFamilyLabel(request.fontFamily);
     }
-    
+
     // 处理字号参数
     let fontSizeValue = config.fontSize as FontSizeLabel;
     if (request.fontSize) {
