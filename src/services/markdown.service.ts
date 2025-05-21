@@ -56,7 +56,6 @@ export class MarkdownService {
             console.log("new instance");
             MarkdownService.instance = new MarkdownService(options);
         } else {
-            console.log("update")
             // 更新现有实例的配置
             MarkdownService.instance.updateConfig(options);
         }
