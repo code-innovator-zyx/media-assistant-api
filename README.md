@@ -34,8 +34,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-username/media-assistant-api.git
-
+git clone git@github.com:code-innovator-zyx/media-assistant-api.git
 # 进入项目目录
 cd media-assistant-api
 

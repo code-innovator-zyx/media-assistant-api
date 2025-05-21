@@ -33,7 +33,7 @@ A powerful Markdown to HTML API service focused on providing beautiful, customiz
 
 ```bash
 # Clone the project
-git clone https://github.com/your-username/media-assistant-api.git
+git clone git@github.com:code-innovator-zyx/media-assistant-api.git
 
 # Enter project directory
 cd media-assistant-api
