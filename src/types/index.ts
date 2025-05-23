@@ -27,7 +27,7 @@ export interface IOpts {
   legend?: string // 图注格式
   citeStatus?: boolean  // 是否启用脚注
   isMacStyle?: boolean  // 是否启用 Mac 风格代码块
-  primaryColor?: string  // 主色调
+  primaryColor: string  // 主色调
   codeTheme?: string;
 }
 

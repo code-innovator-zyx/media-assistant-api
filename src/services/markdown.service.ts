@@ -9,6 +9,7 @@ import { cloneDeep, toMerged } from "es-toolkit";
 import type { PropertiesHyphen } from 'csstype';
 import frontMatter from 'front-matter';
 import { JSDOM } from 'jsdom';
+import { css2json, customCssWithTemplate, customizeTheme } from "@/utils/index.js"
 
 export class MarkdownService {
     private static instance: MarkdownService;
@@ -22,7 +23,7 @@ export class MarkdownService {
     private opts: IOpts;
     private dom: JSDOM;
     private buildTheme({ theme: _theme, fonts, size, isUseIndent, primaryColor }: IOpts): ThemeStyles {
-        const theme = cloneDeep(_theme);
+        let theme = cloneDeep(_theme);
         const base = toMerged(theme.base, {
             'font-family': fonts,
             'font-size': size,
@@ -71,6 +72,28 @@ export class MarkdownService {
         this.footnoteIndex = 0;
         this.codeIndex = 0;
         this.listIndex = 0;
+    }
+    private async getCodeTheme(): Promise<string> {
+        //下载并内联样式，使用缓存
+        try {
+            if (this.opts.codeTheme) {
+                // 检查缓存中是否已有该主题样式
+                if (MarkdownService.codeThemeStylesCache.has(this.opts.codeTheme)) {
+                    return MarkdownService.codeThemeStylesCache.get(this.opts.codeTheme) || '';
+                } else {
+                    // 如果缓存中没有，则下载并缓存
+                    const response = await fetch(this.opts.codeTheme);
+                    const codeThemeStyles = await response.text();
+                    MarkdownService.codeThemeStylesCache.set(this.opts.codeTheme, codeThemeStyles);
+                    console.log('Downloaded and cached code theme styles %s', this.opts.codeTheme);
+                    return codeThemeStyles;
+                }
+            }
+            return ''; // 如果没有设置 codeTheme，返回空字符串
+        } catch (error) {
+            console.error('Error fetching code theme styles:', error);
+            return ''; // 发生错误时返回空字符串
+        }
     }
     private buildMacStyle(): string {
         return this.opts.isMacStyle ? `
@@ -306,39 +329,15 @@ export class MarkdownService {
             </style>
         `;
     }
-
     public async exportHTML(htmlContent: string, primaryColor: string): Promise<string> {
-        const document = this.dom.window.document;
-        document.querySelector('#output')!.innerHTML = htmlContent;
-        const element = document.querySelector('#output')!;
-
         // 处理颜色变量
-        const htmlStr = element.innerHTML
+        const htmlStr = htmlContent
             .replaceAll('var(--md-primary-color)', primaryColor)
             .replaceAll(/--md-primary-color:.+?;/g, '');
-
-        // 下载并内联样式，使用缓存
-        let codeThemeStyles = '';
-        try {
-            if (this.opts.codeTheme) {
-                // 检查缓存中是否已有该主题样式
-                if (MarkdownService.codeThemeStylesCache.has(this.opts.codeTheme)) {
-                    codeThemeStyles = MarkdownService.codeThemeStylesCache.get(this.opts.codeTheme) || '';
-                } else {
-                    // 如果缓存中没有，则下载并缓存
-                    const response = await fetch(this.opts.codeTheme);
-                    codeThemeStyles = await response.text();
-                    MarkdownService.codeThemeStylesCache.set(this.opts.codeTheme, codeThemeStyles);
-                    console.log('Downloaded and cached code theme styles %s', this.opts.codeTheme);
-                }
-            }
-        } catch (error) {
-            console.error('Error fetching code theme styles:', error);
-        }
-
+        const codeThemeStyles = await this.getCodeTheme()
         return `<html><head>
             <meta charset="utf-8" />
-            <style>${codeThemeStyles}</style>
+                        <style>${codeThemeStyles}</style>
             </head>
             <body><div style="width: 750px; margin: auto;">${htmlStr}</div></body></html>`;
     }
@@ -360,14 +359,6 @@ export class MarkdownService {
         outputTemp = this.wrapWithContainer(outputTemp);
         return this.exportHTML(outputTemp, this.opts.primaryColor || '');
     }
-
-    public reset(newOpts: Partial<IOpts>): void {
-        this.footnotes = [];
-        this.footnoteIndex = 0;
-        this.opts = { ...this.opts, ...newOpts };
-        this.styleMapping = this.buildTheme(this.opts);
-    }
-
     private wrapWithContainer(content: string): string {
         return this.styledContent('container', content, 'section');
     }
