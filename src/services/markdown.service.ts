@@ -8,8 +8,7 @@ import { codeRenderer } from "./renderers/CodeRenderer.js";
 import { cloneDeep, toMerged } from "es-toolkit";
 import type { PropertiesHyphen } from 'csstype';
 import frontMatter from 'front-matter';
-import { JSDOM } from 'jsdom';
-import { css2json, customCssWithTemplate, customizeTheme } from "@/utils/index.js"
+import { css2json } from "@/utils/index.js";
 
 export class MarkdownService {
     private static instance: MarkdownService;
@@ -21,13 +20,20 @@ export class MarkdownService {
     private listIndex: number = 0;
     private isOrdered: boolean = false;
     private opts: IOpts;
-    private dom: JSDOM;
+    /**
+     * 构建样式
+     * @param param0 
+     * @returns 
+     */
     private buildTheme({ theme: _theme, fonts, size, isUseIndent, primaryColor }: IOpts): ThemeStyles {
         let theme = cloneDeep(_theme);
+        this.getCodeTheme().then(codeTheme => {
+            const codeCss = css2json(codeTheme)
+            theme = toMerged(codeCss, theme)
+        })
         const base = toMerged(theme.base, {
             'font-family': fonts,
             'font-size': size,
-            '--md-primary-color': primaryColor
         });
         if (isUseIndent) {
             theme.block.p = {
@@ -48,13 +54,11 @@ export class MarkdownService {
     private constructor(options: IOpts) {
         this.opts = options;
         this.styleMapping = this.buildTheme(options);
-        this.dom = new JSDOM(`<!DOCTYPE html><html><body><div id="output"></div></body></html>`);
         this.initializeMarked();
     }
 
     public static getInstance(options: IOpts): MarkdownService {
         if (!MarkdownService.instance) {
-            console.log("new instance");
             MarkdownService.instance = new MarkdownService(options);
         } else {
             // 更新现有实例的配置
@@ -337,7 +341,6 @@ export class MarkdownService {
         const codeThemeStyles = await this.getCodeTheme()
         return `<html><head>
             <meta charset="utf-8" />
-                        <style>${codeThemeStyles}</style>
             </head>
             <body><div style="width: 750px; margin: auto;">${htmlStr}</div></body></html>`;
     }

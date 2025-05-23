@@ -6,5 +6,5 @@ export const config = {
     legend: `只显示 title`,  // 图注格式
     theme: `default`,
     isUseIndent: false,  // 首行缩进
-    codeTheme: `https://cdn.bootcdn.net/ajax/libs/highlight.js/11.10.0/styles/an-old-hope.min.css`,
+    codeTheme: `tokyo-night-light`,
 }

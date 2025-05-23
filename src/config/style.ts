@@ -61,17 +61,17 @@ const fontSizeOptions: IConfigOption[] = [
 // 字体颜色
 // 字体大小
 export function fontSize(label: FontSizeLabel | string): IConfigOption {
-    // 如果是自定义字号
-    if (typeof label === 'string' && /^\d+px$/.test(label)) {
-        return {
-            label: label,
-            value: label,
-            desc: '自定义'
-        };
-    }
-    // 如果是预设字号
-    const option = fontSizeOptions.find((item) => item.label === label);
-    return option ? option : fontSizeOptions[2];
+  // 如果是自定义字号
+  if (typeof label === 'string' && /^\d+px$/.test(label)) {
+    return {
+      label: label,
+      value: label,
+      desc: '自定义'
+    };
+  }
+  // 如果是预设字号
+  const option = fontSizeOptions.find((item) => item.label === label);
+  return option ? option : fontSizeOptions[2];
 }
 
 
@@ -147,7 +147,7 @@ const codeBlockThemeList = [
   `agate.min.css`,
   `an-old-hope.min.css`,
   `androidstudio.min.css`,
-  `arduino-light.min.css`,
+  `arduino-light.min.css`, 
   `arta.min.css`,
   `ascetic.min.css`,
   `atom-one-dark-reasonable.min.css`,
@@ -261,4 +261,20 @@ const legendOptions = [
 export function getLegend(label: LegendLabel): IConfigOption {
   const option = legendOptions.find((item) => item.label === label)
   return option ? option : legendOptions[2]
+}
+
+// 获取代码块主题URL
+export function codeBlockTheme(themeName: string): string {
+  // 移除.min.css后缀获取主题名
+  const normalizedThemeName = themeName.endsWith('.min.css')
+    ? themeName
+    : `${themeName}.min.css`;
+
+  // 检查是否是有效的主题
+  if (codeBlockThemeList.includes(normalizedThemeName)) {
+    return `${codeBlockUrlPrefix}${normalizedThemeName}`;
+  }
+
+  // 默认返回github主题
+  return `${codeBlockUrlPrefix}github.min.css`;
 }

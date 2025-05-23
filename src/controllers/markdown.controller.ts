@@ -7,18 +7,20 @@ import { dirname, join } from 'path';
 import type { MarkdownToHtmlRequest } from '@/types/markdown.js';
 import { config } from '@/config/config.js';
 import { theme } from '@/config/theme.js';
-import { fontFamily, fontSize } from '@/config/style.js';
+import { fontFamily, fontSize, codeBlockTheme } from '@/config/style.js';
 import { FontFamilyLabel, FontSizeLabel } from '@/types/index.js';
+import { css2json, customCssWithTemplate, customizeTheme } from "@/utils/index.js"
 
 export class MarkdownController {
     private static instance: MarkdownController;
     private markdownService!: MarkdownService;
     private readonly templatePath: string;
-
+    private cssContent: string;
     private constructor() {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
         this.templatePath = join(__dirname, "../templates/preview.md");
+        this.cssContent = readFileSync(join(__dirname, "../config/style.css"), "utf-8")
     }
 
     public static getInstance(): MarkdownController {
@@ -75,18 +77,21 @@ export class MarkdownController {
             const sizeValue = this.stringToFontSizeLabel(options.fontSize);
             fontSizeValue = sizeValue as FontSizeLabel;
         }
-
+        const primaryColor = options.primaryColor || config.color
+        const fontSizeNumber = Number(fontSizeValue.replace(`px`, ``))
         // 初始化 MarkdownService
         this.markdownService = MarkdownService.getInstance({
-            theme: theme(options.theme || config.theme),  // 主题
+            theme: customCssWithTemplate(css2json(this.cssContent),
+                primaryColor, customizeTheme(theme(options.theme || config.theme),
+                    { fontSize: fontSizeNumber, color: primaryColor })),  // 主题
             fonts: fontFamily(fontFamilyValue).value, // 字体
             size: fontSize(fontSizeValue).value,  // 字号
             isUseIndent: options.isUseIndent !== undefined ? options.isUseIndent : config.isUseIndent, // 是否使用缩进
             isMacStyle: options.isMacCodeBlock, // 是否使用mac代码块
-            primaryColor: options.primaryColor || config.color,  // 主色调
+            primaryColor: primaryColor,  // 主色调
             citeStatus: options.citeStatus !== undefined ? options.citeStatus : true,  // 是否启用引用
             legend: options.legend || config.legend,  // 图例
-            codeTheme: options.codeTheme || config.codeTheme,
+            codeTheme: codeBlockTheme(options.codeTheme || config.codeTheme),
         });
     }
 

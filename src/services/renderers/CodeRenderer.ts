@@ -15,7 +15,6 @@ export function codeRenderer(text: string, lang: string, styleMapping: ThemeStyl
     const language = hljs.getLanguage(langText) ? langText : 'plaintext';
     let highlighted = hljs.highlight(text, { language }).value;
 
-    // Format code
     highlighted = formatCode(highlighted);
 
     // Add mac-style GUI and code wrapper
@@ -32,7 +31,7 @@ function formatCode(code: string): string {
 
 function wrapCodeBlock(code: string, lang: string, styleMapping: ThemeStyles): string {
     const span = `<span class="mac-sign" style="padding: 10px 14px 0;" hidden>${macCodeSvg}</span>`;
-    console.log(lang);
+    console.log(getStyles(styleMapping, 'code_pre'));
 
     const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code')}>${code}</code>`;
     return `<pre class="hljs code__pre" ${getStyles(styleMapping, 'code_pre')}>${span}${codeElement}</pre>`;

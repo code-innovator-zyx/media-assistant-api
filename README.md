@@ -2,113 +2,92 @@
 
 [English](README.en.md) | 简体中文
 
-一个强大的 Markdown 转 HTML 的 API 服务，专注于提供美观、可定制的内容转换能力。支持多种高级特性，让您的 Markdown 内容转换更加灵活和专业。
+Media Assistant API 是一个功能强大的 Markdown 转 HTML 服务，致力于提供美观且可定制的内容转换能力。支持多种高级特性，让 Markdown 内容转换更灵活、更专业。
 
-[在线转换地址](https://md.openwrite.cn/)
+👉 在线体验：[点击前往](https://md.openwrite.cn/)
 
-## 📝 TODO
+---
+
+## 📝 开发计划（TODO）
 
 ### 🎨 功能增强
-- [x] 支持更多 Markdown 扩展语法
-- [x] 添加更多预设主题
-- [x] 支持动态样式切换
-- [x] 支持自定义字体
-- [x] 增加自定义 CSS 样式
-- [x] 支持自定义 Markdown 扩展语法
-- [x] 支持自定义主题样式
-- [x] 支持自定义代码高亮主题
-- [ ] 增加图片处理功能（压缩、水印等）
-- [ ] 支持导出 PDF 格式
 
+* ✅ 支持更多 Markdown 扩展语法
+* ✅ 添加多种预设主题
+* ✅ 动态样式切换
+* ✅ 自定义字体与样式
+* ✅ 支持自定义 CSS 与代码高亮主题
+* ⬜ 增加图片处理功能（压缩、水印等）
+* ⬜ 支持导出 PDF 格式
 
 ### 📚 文档完善
-- [x] 添加详细的 API 使用示例
-- [ ] 编写开发者贡献指南
-- [ ] 补充常见问题解答（FAQ）
-- [x] 添加在线演示环境
 
+* ✅ 提供完整的 API 使用示例
+* ⬜ 编写贡献指南
+* ⬜ 补充常见问题解答（FAQ）
+* ✅ 提供在线演示环境
 
-## 🚀 快速开始
+---
 
-### 安装
+## ✨ 核心特性
 
-```bash
-# 克隆项目
-git clone git@github.com:code-innovator-zyx/media-assistant-api.git
-# 进入项目目录
-cd media-assistant-api
+### 🎨 自定义主题样式
 
-# 安装依赖
-pnpm install
+* 配置字体、颜色、间距等参数
+* 支持暗黑模式
+* 提供多套主题，支持自定义 CSS 覆盖
 
-# 启动开发服务器
-pnpm dev
+### 📊 Mermaid 图表支持
+
+* 流程图、时序图、甘特图、类图等
+
+### ✍️ 数学公式支持（KaTeX）
+
+* 行内与块级公式
+* 完整支持 KaTeX 语法
+
+### 🎯 自定义提示框
+
+* 支持信息、警告、错误、成功四种提示类型
+
+### 💫 Mac 风格代码块
+
+* 高亮、行号、复制按钮、语言标识
+
+### 🔗 脚注与引用链接支持
+
+### 📱 响应式设计，完美适配移动端
+
+### 🎈 轻量部署，快速上手
+
+---
+
+## 📦 API 接口说明
+
+### Markdown 转 HTML
+
+* **接口路径**：`POST /markdown/html`
+* **请求头**：`Content-Type: application/json`
+* **请求体**：
+
+```json
+{
+  "data": "# Markdown 内容",           // 必填
+  "isMacCodeBlock": true,               // 启用 Mac 风格代码块（可选）
+  "theme": "default",                  // 主题名称：default、grace（可选）
+  "fontFamily": "无衬线",              // 字体类型：无衬线、衬线、等宽（可选）
+  "fontSize": "15px",                 // 字体大小（例如：14px）（可选）
+  "isUseIndent": true,                 // 是否启用缩进（可选）
+  "primaryColor": "#1890ff",          // 主色调（可选）
+  "citeStatus": true,                  // 是否启用引用（可选）
+  "legend": "只显示 title",            // 图例样式（可选）
+  "codeTheme": "1c-light"             // 代码高亮主题（可选）
+}
 ```
 
-## ✨ 特性
+* **响应示例**：
 
-- 🎨 支持自定义主题样式
-  - 可配置字体、颜色、间距等样式
-  - 支持暗黑模式切换
-  - 提供多套预设主题
-  - 支持自定义 CSS 样式覆盖
-
-- 📊 支持 Mermaid 图表渲染
-  - 流程图
-  - 时序图
-  - 甘特图
-  - 类图等
-
-- ✍️ 支持 KaTeX 数学公式
-  - 行内公式
-  - 块级公式
-  - 支持所有 KaTeX 语法
-
-- 🎯 支持自定义警告框
-  - 信息提示
-  - 警告提示
-  - 错误提示
-  - 成功提示
-
-- 💫 支持 Mac 风格代码块
-  - 代码高亮
-  - 行号显示
-  - 复制功能
-  - 语言标识
-
-- 🔗 支持脚注和引用链接
-- 📱 响应式设计，完美适配移动端
-- 🎈 轻量级，易于部署
-
-## 🖼️ 预览效果
-
-![预览效果图](assets/preview.png)
-
-## 📦 API 文档
-
-### 1. Markdown 转 HTML
-
-将 Markdown 文本转换为 HTML 格式。
-
-```http
-POST /markdown/html
-Content-Type: application/json
-
-// 请求体：
-{
-  "data": "# Your Markdown Content",    // Markdown 内容（必填）
-  "isMacCodeBlock": true,              // 是否启用 Mac 风格代码块（可选）
-  "theme": "default",                    // 主题名称（可选）：default、grace
-  "fontFamily": "无衬线",              // 字体类型（可选）：无衬线、衬线、等宽
-  "fontSize": "15px",                 // 字号：任意像素值  例: 14px
-  "isUseIndent": true,                // 是否使用缩进（可选）
-  "primaryColor": "#1890ff",          // 主色调（可选）
-  "citeStatus": true,                 // 是否启用引用（可选）
-  "legend": "只显示 title",           // 图例样式（可选）：title 优先、alt 优先、只显示 title、只显示 alt、不显示
-"codeTheme":"https://cdn.bootcdn.net/ajax/libs/highlight.js/11.10.0/styles/an-old-hope.min.css"// 代码主题css 地址
-}
-
-//响应：
+```json
 {
   "status": "success",
   "data": {
@@ -117,50 +96,82 @@ Content-Type: application/json
 }
 ```
 
-### 2. 效果预览
+### 支持的代码高亮主题
 
-获取一个包含示例内容的 Markdown 预览页面。
+| 主题名称            | 描述                 |
+| ------------------- | -------------------- |
+| `1c-light`          | 1C语言浅色主题       |
+| `a11y-dark`         | 无障碍深色主题       |
+| `a11y-light`        | 无障碍浅色主题       |
+| `agate`             | 玛瑙主题             |
+| `an-old-hope`       | 旧希望主题           |
+| `androidstudio`     | Android Studio 风格  |
+| `arduino-light`     | Arduino 浅色主题     |
+| `arta`              | 艺术主题             |
+| `ascetic`           | 简朴主题             |
+| `atom-one-dark`     | Atom 深色主题        |
+| `atom-one-light`    | Atom 浅色主题        |
+| `github-dark`       | GitHub 深色主题      |
+| `github`            | GitHub 标准主题      |
+| `monokai`           | Monokai 经典主题     |
+| `monokai-sublime`   | Sublime Monokai 风格 |
+| `nord`              | 北欧极光风格主题     |
+| `tokyo-night-dark`  | 东京之夜深色主题     |
+| `tokyo-night-light` | 东京之夜浅色主题     |
+| `vs`                | Visual Studio 主题   |
+| `vs2015`            | Visual Studio 2015   |
+| `xcode`             | Xcode 风格           |
 
-```http
-GET /markdown/preview
+---
 
-查询参数：
-- isMacCodeBlock: boolean  // 是否启用 Mac 风格代码块
-- theme: string           // 主题名称（可选）：default、grace
-- fontFamily: string      // 字体类型（可选）：无衬线、衬线、等宽
-- fontSize: string        // 字号：任意像素值  例: 14px
-- isUseIndent: boolean    // 是否使用缩进（可选）
-- primaryColor: string    // 主色调（可选）
-- citeStatus: boolean     // 是否启用引用（可选）
-- legend: string         // 图例样图例样式（可选）：title 优先、alt 优先、只显示 title、只显示 alt、不显示式
-- codeTheme: string      // 代码主题 使用css 下载地址
+### 🖼️ Markdown 示例预览
 
-响应：
-返回一个包含预览内容的 HTML 页面
+* **接口路径**：`GET /markdown/preview`
+* **支持参数**：同上
+* **响应**：返回 HTML 页面，内含预览效果
+
+示例图：
+![预览效果图](assets/preview.png)
+
+---
+
+## 🚀 快速开始
+
+```bash
+# 克隆仓库
+git clone git@github.com:code-innovator-zyx/media-assistant-api.git
+cd media-assistant-api
+
+# 安装依赖
+pnpm install
+
+# 启动开发服务
+pnpm dev
 ```
 
+---
 
-## 🛠️ 项目配置
+## 🛠️ 配置说明
 
 ### 环境变量
 
-在项目根目录创建 `.env` 文件：
+在根目录创建 `.env` 文件：
 
 ```env
-PORT=3000                # 服务端口
-NODE_ENV=development     # 运行环境
+PORT=3000
+NODE_ENV=development
 ```
 
-### 主题配置
+### 默认主题配置
 
-在 `src/config/theme.ts` 中可以自定义默认的主题样式：
+在 `src/config/theme.ts` 中自定义：
 
-```typescript
+```ts
 export const themes = {
   default: {
     fontSize: '16px',
     lineHeight: '1.6',
-    // 更多样式配置...
+    // 更多配置...
   },
   dark: {
     // 暗黑主题配置
@@ -168,13 +179,16 @@ export const themes = {
 }
 ```
 
-### 调用示例(以python为例)
+---
+
+## 📌 示例调用（Python）
+
 ```python
 def parse_html(md: str):
-   # 选择你需要的参数
     params = {
-        "data": md, "isMacCodeBlock": False,
-        "fontSize": '14px'
+        "data": md,
+        "isMacCodeBlock": False,
+        "fontSize": "14px"
     }
     res = requests.post(
         url="http://localhost:8080/api/markdown/html",
@@ -185,14 +199,18 @@ def parse_html(md: str):
     return res.json()["data"]
 ```
 
+---
+
 ## 🤝 贡献指南
 
-1. Fork 本仓库
-2. 创建特性分支：`git checkout -b feature/AmazingFeature`
-3. 提交改动：`git commit -m 'Add some AmazingFeature'`
-4. 推送分支：`git push origin feature/AmazingFeature`
-5. 提交 Pull Request
+1. Fork 本项目
+2. 新建分支：`git checkout -b feature/你的功能名称`
+3. 提交更改：`git commit -m '添加功能说明'`
+4. 推送分支：`git push origin feature/你的功能名称`
+5. 发起 Pull Request
+
+---
 
 ## 📄 开源协议
 
-本项目基于 [MIT](LICENSE) 协议开源。
+本项目遵循 [MIT](LICENSE) 协议开源，欢迎使用与贡献！
