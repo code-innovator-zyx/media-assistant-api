@@ -1,12 +1,12 @@
 // src/app.ts
 import express from 'express';
+import figlet from "figlet"
 import cors from 'cors';
 import helmet from 'helmet';
 import { errorHandler } from '@/middleware/errorHandler.js';
 import { requestLogger } from '@/middleware/requestLogger.js';
 import { routes } from '@/routes/index.js';
 import { config } from '@/config/index.js';
-
 const app = express();
 
 // Security middleware
@@ -35,7 +35,15 @@ app.use('/api', routes);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
-    console.log(`Server is running on port ${config.port} in ${config.nodeEnv} mode`);
+    figlet('Media Assistant', (err, data) => {
+        if (err) {
+            console.log('Error generating ASCII art');
+            console.log(err);
+            return;
+        }
+        console.log(data);
+        console.log(`\n🚀 Media Assistant API is running at http://localhost:${config.port}\n`);
+    });
 });
 
 export default app;
