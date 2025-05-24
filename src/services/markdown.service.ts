@@ -25,12 +25,9 @@ export class MarkdownService {
      * @param param0 
      * @returns 
      */
-    private buildTheme({ theme: _theme, fonts, size, isUseIndent, primaryColor }: IOpts): ThemeStyles {
+    private buildTheme({ theme: _theme, fonts, size, isUseIndent }: IOpts): ThemeStyles {
         let theme = cloneDeep(_theme);
-        this.getCodeTheme().then(codeTheme => {
-            const codeCss = css2json(codeTheme)
-            theme = toMerged(codeCss, theme)
-        })
+
         const base = toMerged(theme.base, {
             'font-family': fonts,
             'font-size': size,
@@ -54,6 +51,7 @@ export class MarkdownService {
     private constructor(options: IOpts) {
         this.opts = options;
         this.styleMapping = this.buildTheme(options);
+        console.log(this.styleMapping)
         this.initializeMarked();
     }
 
@@ -71,6 +69,7 @@ export class MarkdownService {
     private updateConfig(options: IOpts): void {
         this.opts = options;
         this.styleMapping = this.buildTheme(options);
+        // console.log(this.styleMapping)
         this.initializeMarked(); // 重新初始化 marked 以应用新的样式
         this.footnotes = [];
         this.footnoteIndex = 0;
@@ -338,7 +337,7 @@ export class MarkdownService {
         const htmlStr = htmlContent
             .replaceAll('var(--md-primary-color)', primaryColor)
             .replaceAll(/--md-primary-color:.+?;/g, '');
-        const codeThemeStyles = await this.getCodeTheme()
+        // const codeThemeStyles = await this.getCodeTheme()
         return `<html><head>
             <meta charset="utf-8" />
             </head>

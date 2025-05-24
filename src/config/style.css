@@ -105,8 +105,8 @@ li {
 }
 /* 代码块样式 */
 code {
-    /* color: white; */
-    /* background: black; */
+    color: white;
+    background: black;
     text-align: left; 
     line-height: 1.75;
     font-family: Menlo, Operator Mono, Consolas, Monaco, monospace; 

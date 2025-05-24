@@ -97,31 +97,81 @@ Response:
 ```
 
 Available Code Themes:
-
-| Name              | Description               |
-| ----------------- | ------------------------- |
-| 1c-light          | 1C language light theme   |
-| a11y-dark         | Accessibility dark theme  |
-| a11y-light        | Accessibility light theme |
-| agate             | Agate theme               |
-| an-old-hope       | Old Hope theme            |
-| androidstudio     | Android Studio theme      |
-| arduino-light     | Arduino light theme       |
-| arta              | Arta theme                |
-| ascetic           | Minimalist theme          |
-| atom-one-dark     | Atom dark theme           |
-| atom-one-light    | Atom light theme          |
-| github-dark       | GitHub dark theme         |
-| github            | GitHub standard theme     |
-| monokai           | Monokai theme             |
-| monokai-sublime   | Sublime Monokai theme     |
-| nord              | Nord theme                |
-| tokyo-night-dark  | Tokyo Night dark          |
-| tokyo-night-light | Tokyo Night light         |
-| vs                | Visual Studio theme       |
-| vs2015            | VS2015 dark theme         |
-| xcode             | Xcode theme               |
-
+| Theme Name               | Alias                | Style Description                                    |
+| ------------------------ | -------------------- | ---------------------------------------------------- |
+| 1c-light                 | 1C Light             | Bright light theme inspired by 1C                    |
+| a11y-dark                | A11Y Dark            | High contrast, accessible dark theme                 |
+| a11y-light               | A11Y Light           | High contrast, accessible light theme                |
+| agate                    | Agate                | Soft dark theme                                      |
+| an-old-hope              | An Old Hope          | Dark theme with blue tones, inspired by Star Wars    |
+| androidstudio            | Android Studio       | Android Studio editor color scheme                   |
+| arduino-light            | Arduino Light        | Arduino IDE inspired light theme                     |
+| arta                     | Arta                 | Bright theme with strong contrast, artistic feel     |
+| ascetic                  | Ascetic              | Minimal, clean layout without background             |
+| atom-one-dark-reasonable | Atom Reasonable Dark | Enhanced contrast version of Atom Dark               |
+| atom-one-dark            | Atom Dark            | Classic Atom dark theme                              |
+| atom-one-light           | Atom Light           | Classic Atom light theme                             |
+| brown-paper              | Brown Paper          | Retro theme with kraft paper texture                 |
+| codepen-embed            | CodePen Embed        | Style for embedded CodePen snippets                  |
+| color-brewer             | Color Brewer         | Multicolor theme with rich palette                   |
+| dark                     | Dark                 | Basic pure dark theme                                |
+| default                  | Default              | Default highlight.js theme                           |
+| devibeans                | Devibeans            | Strong contrast, minimalist dark theme               |
+| docco                    | Docco                | Document-like layout, highly readable                |
+| far                      | FAR Manager          | Imitates FAR file manager UI                         |
+| felipec                  | Felipe Style         | Personalized theme with color contrasts              |
+| foundation               | Foundation           | Based on Foundation framework styling                |
+| github-dark-dimmed       | GitHub Dimmed        | Low-brightness GitHub dark theme                     |
+| github-dark              | GitHub Dark          | Official GitHub dark theme                           |
+| github                   | GitHub               | Official GitHub light theme                          |
+| gml                      | GML                  | GameMaker Language style                             |
+| googlecode               | Google Code          | Classic Google Code color scheme                     |
+| gradient-dark            | Gradient Dark        | Cool dark theme with gradient background             |
+| gradient-light           | Gradient Light       | Modern light theme with gradient effects             |
+| grayscale                | Grayscale            | Gray-toned theme, minimalist and eye-friendly        |
+| hybrid                   | Hybrid               | Neutral theme combining multiple color styles        |
+| idea                     | IntelliJ IDEA        | JetBrains dark theme                                 |
+| intellij-light           | IntelliJ Light       | JetBrains light theme                                |
+| ir-black                 | IR Black             | Classic hacker style with black background           |
+| isbl-editor-dark         | ISBL Dark            | Dark theme for ISBL editor                           |
+| isbl-editor-light        | ISBL Light           | Light theme for ISBL editor                          |
+| kimbie-dark              | Kimbie Dark          | Retro dark theme with yellow and brown tones         |
+| kimbie-light             | Kimbie Light         | Soft yellow-brown light theme                        |
+| lightfair                | Lightfair            | Clean and bright with blue undertones                |
+| lioshi                   | Lioshi               | Stylish, unique dark theme                           |
+| magula                   | Magula               | Bright and non-straining light theme                 |
+| mono-blue                | Mono Blue            | Blue-dominated, cool-tone theme                      |
+| monokai-sublime          | Monokai Sublime      | Sublime Text color scheme                            |
+| monokai                  | Monokai              | Classic high-contrast dark editor theme              |
+| night-owl                | Night Owl            | Eye-friendly dark theme with blue-green tones        |
+| nnfx-dark                | NNFX Dark            | Low-brightness black theme                           |
+| nnfx-light               | NNFX Light           | Eye-friendly light green theme                       |
+| nord                     | Nord                 | Arctic blue tones, soft and gentle                   |
+| obsidian                 | Obsidian             | Inspired by Obsidian app's dark theme                |
+| panda-syntax-dark        | Panda Dark           | High saturation dark theme for night coding          |
+| panda-syntax-light       | Panda Light          | Bright and colorful light theme                      |
+| paraiso-dark             | Paraiso Dark         | Soft purple-blue dark theme                          |
+| paraiso-light            | Paraiso Light        | Gentle light theme                                   |
+| pojoaque                 | Pojoaque             | Vintage scroll-style theme                           |
+| purebasic                | PureBasic            | Blue background with white text, PureBasic IDE style |
+| qtcreator-dark           | QtCreator Dark       | Dark theme for Qt Creator IDE                        |
+| qtcreator-light          | QtCreator Light      | Light theme for Qt Creator IDE                       |
+| rainbow                  | Rainbow              | Highly colorful, great for presentations             |
+| routeros                 | RouterOS             | Mimics MikroTik RouterOS console style               |
+| school-book              | School Book          | Textbook-style with annotation-like highlights       |
+| shades-of-purple         | Shades of Purple     | Purple-dominated with strong visual contrast         |
+| srcery                   | Srcery               | Bold red-focused high-contrast theme                 |
+| stackoverflow-dark       | SO Dark              | StackOverflow dark theme                             |
+| stackoverflow-light      | SO Light             | StackOverflow light theme                            |
+| sunburst                 | Sunburst             | Black background with yellow-red highlights          |
+| tokyo-night-dark         | Tokyo Night          | Anime-inspired purple-blue night theme               |
+| tokyo-night-light        | Tokyo Day            | Light and fresh Japanese-inspired theme              |
+| tomorrow-night-blue      | Tomorrow Blue        | Future-themed with blue tones                        |
+| tomorrow-night-bright    | Tomorrow Bright      | Brighter version of tomorrow night theme             |
+| vs                       | Visual Studio        | Light theme based on Visual Studio                   |
+| vs2015                   | VS2015               | Dark theme from Visual Studio 2015                   |
+| xcode                    | Xcode                | macOS Xcode editor theme                             |
+| xt256                    | XT256                | Terminal-style with 16/256 colors                    |
 ### 2. 🖼️ Preview
 
 ```http

@@ -65,6 +65,7 @@ export function customCssWithTemplate(jsonString: Partial<Record<Block | Inline,
     `image`,
     `ul`,
     `ol`,
+    `.hljs`,
   ]
   const inlineKeys: Inline[] = [`strong`, `codespan`, `link`, `wx_link`, `listitem`]
 
