@@ -116,9 +116,5 @@ code {
    }
 /* 代码块外层样式 */
 code_pre {
-    /* background: #1c1d21; */
-    /* color: #c0c5ce; */
      text-align: left; line-height: 1.5; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 14px; overflow-x: auto; border-radius: 8px; padding: 1em; margin: 10px 8px
 }
-
-

@@ -8,11 +8,9 @@ import { codeRenderer } from "./renderers/CodeRenderer.js";
 import { cloneDeep, toMerged } from "es-toolkit";
 import type { PropertiesHyphen } from 'csstype';
 import frontMatter from 'front-matter';
-import { css2json } from "@/utils/index.js";
 
 export class MarkdownService {
     private static instance: MarkdownService;
-    private static codeThemeStylesCache: Map<string, string> = new Map();
     private footnotes: [number, string, string][] = [];
     private footnoteIndex: number = 0;
     private styleMapping: ThemeStyles;
@@ -51,7 +49,6 @@ export class MarkdownService {
     private constructor(options: IOpts) {
         this.opts = options;
         this.styleMapping = this.buildTheme(options);
-        console.log(this.styleMapping)
         this.initializeMarked();
     }
 
@@ -76,28 +73,7 @@ export class MarkdownService {
         this.codeIndex = 0;
         this.listIndex = 0;
     }
-    private async getCodeTheme(): Promise<string> {
-        //下载并内联样式，使用缓存
-        try {
-            if (this.opts.codeTheme) {
-                // 检查缓存中是否已有该主题样式
-                if (MarkdownService.codeThemeStylesCache.has(this.opts.codeTheme)) {
-                    return MarkdownService.codeThemeStylesCache.get(this.opts.codeTheme) || '';
-                } else {
-                    // 如果缓存中没有，则下载并缓存
-                    const response = await fetch(this.opts.codeTheme);
-                    const codeThemeStyles = await response.text();
-                    MarkdownService.codeThemeStylesCache.set(this.opts.codeTheme, codeThemeStyles);
-                    console.log('Downloaded and cached code theme styles %s', this.opts.codeTheme);
-                    return codeThemeStyles;
-                }
-            }
-            return ''; // 如果没有设置 codeTheme，返回空字符串
-        } catch (error) {
-            console.error('Error fetching code theme styles:', error);
-            return ''; // 发生错误时返回空字符串
-        }
-    }
+
     private buildMacStyle(): string {
         return this.opts.isMacStyle ? `
             <style>
