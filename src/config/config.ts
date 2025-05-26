@@ -6,5 +6,5 @@ export const config = {
     legend: `只显示 title`,  // 图注格式
     theme: `default`,
     isUseIndent: false,  // 首行缩进
-    codeTheme: `tokyo-night-light`,
+    codeTheme: `srcery`,
 }

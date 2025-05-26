@@ -105,16 +105,7 @@ li {
 }
 /* 代码块样式 */
 code {
-    color: white;
-    background: black;
-    text-align: left; 
-    line-height: 1.75;
-    font-family: Menlo, Operator Mono, Consolas, Monaco, monospace; 
-    font-size: 14px; 
-    margin: 0; 
-    white-space: nowrap
    }
 /* 代码块外层样式 */
 code_pre {
-     text-align: left; line-height: 1.5; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: 14px; overflow-x: auto; border-radius: 8px; padding: 1em; margin: 10px 8px
 }

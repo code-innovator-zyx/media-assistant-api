@@ -1,7 +1,5 @@
-import type { IConfigOption, Theme } from '@/types'
-import { ThemeLabel } from '@/types/index.js'
+import type { Theme } from '@/types'
 import { toMerged } from 'es-toolkit'
-
 const defaultTheme: Theme = {
   base: {
     '--md-primary-color': `#000000`,
@@ -10,6 +8,10 @@ const defaultTheme: Theme = {
   },
   block: {
     container: {},
+    ".hljs": {
+      background: "#1c1d21",
+      color: "#c0c5ce",
+    },
     // 一级标题
     h1: {
       'display': `table`,

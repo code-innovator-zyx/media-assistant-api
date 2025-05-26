@@ -34,5 +34,8 @@ function wrapCodeBlock(code: string, lang: string, styleMapping: ThemeStyles): s
 
     const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code')}>${code}</code>`;
 
-    return `<pre class="hljs code__pre" ${getStyles(styleMapping, `code_pre`)}>${span}${codeElement}</pre>`;
+
+
+
+    return `<pre class="hljs code__pre" ${getStyles(styleMapping, `.hljs`)}>${span}${codeElement}</pre>`;
 } 
