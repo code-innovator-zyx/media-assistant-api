@@ -32,10 +32,7 @@ function formatCode(code: string): string {
 function wrapCodeBlock(code: string, lang: string, styleMapping: ThemeStyles): string {
     const span = `<span class="mac-sign" style="padding: 10px 14px 0;" hidden>${macCodeSvg}</span>`;
 
-    const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code')}>${code}</code>`;
-
-
-
+    const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code')}>${code}</code>`
 
     return `<pre class="hljs code__pre" ${getStyles(styleMapping, `.hljs`)}>${span}${codeElement}</pre>`;
 } 

@@ -10,6 +10,7 @@ import { theme } from '@/config/theme.js';
 import { fontFamily, fontSize, codeBlockTheme } from '@/config/style.js';
 import { FontFamilyLabel, FontSizeLabel } from '@/types/index.js';
 import { css2json, customCssWithTemplate, customizeTheme } from "@/utils/index.js"
+import { log } from 'console';
 
 export class MarkdownController {
     private static codeThemeStylesCache: Map<string, string> = new Map();
@@ -85,6 +86,8 @@ export class MarkdownController {
     }
 
     private async initializeMarkdownService(options: Partial<MarkdownToHtmlRequest>) {
+        console.log(options);
+
         // 处理字体参数
         let fontFamilyValue = config.fontFamily as FontFamilyLabel;
         if (options.fontFamily) {
@@ -116,18 +119,42 @@ export class MarkdownController {
         });
     }
 
+    private normalizeOptions(rawOptions: Record<string, any>, isFromQuery = false): Partial<MarkdownToHtmlRequest> {
+        const options = {
+            isMacCodeBlock: isFromQuery ? rawOptions.isMacCodeBlock === 'true' : rawOptions.isMacCodeBlock,
+            theme: rawOptions.theme as string,
+            fontFamily: rawOptions.fontFamily as string,
+            fontSize: rawOptions.fontSize as string,
+            isUseIndent: isFromQuery ? rawOptions.isUseIndent === 'true' : rawOptions.isUseIndent,
+            primaryColor: rawOptions.primaryColor as string,
+            citeStatus: isFromQuery ? rawOptions.citeStatus === 'true' : rawOptions.citeStatus,
+            legend: rawOptions.legend as string,
+            codeTheme: rawOptions.codeTheme as string
+        };
+
+        // 移除所有未定义的属性
+        Object.keys(options).forEach(key => {
+            if (options[key as keyof typeof options] === undefined) {
+                delete options[key as keyof typeof options];
+            }
+        });
+
+        return options;
+    }
+
     public convertToHtml = async (
         req: Request,
         res: Response,
         next: NextFunction
     ) => {
         try {
-            const { data, ...options } = req.body;
+            const { data, ...rawOptions } = req.body;
 
             if (!data || data.length === 0) {
                 throw new AppError(400, 'Markdown content is required');
             }
 
+            const options = this.normalizeOptions(rawOptions, false);
             await this.initializeMarkdownService(options);
             const html = await this.markdownService.render(data);
 
@@ -150,25 +177,7 @@ export class MarkdownController {
             if (!previewContent) {
                 throw new AppError(500, 'Failed to load preview template');
             }
-            const options = {
-                isMacCodeBlock: req.query.isMacCodeBlock === 'true',
-                theme: req.query.theme as string,
-                fontFamily: req.query.fontFamily as string,
-                fontSize: req.query.fontSize as string,
-                isUseIndent: req.query.isUseIndent === 'true',
-                primaryColor: req.query.primaryColor as string,
-                citeStatus: req.query.citeStatus === 'true',
-                legend: req.query.legend as string,
-                codeTheme: req.query.codeTheme as string
-            };
-
-            // 移除所有未定义的属性
-            Object.keys(options).forEach(key => {
-                if (options[key as keyof typeof options] === undefined) {
-                    delete options[key as keyof typeof options];
-                }
-            });
-
+            const options = this.normalizeOptions(req.query, true);
             await this.initializeMarkdownService(options);
             const html = await this.markdownService.render(previewContent);
 

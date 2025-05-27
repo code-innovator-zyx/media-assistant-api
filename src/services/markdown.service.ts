@@ -66,7 +66,6 @@ export class MarkdownService {
     private updateConfig(options: IOpts): void {
         this.opts = options;
         this.styleMapping = this.buildTheme(options);
-        // console.log(this.styleMapping)
         this.initializeMarked(); // 重新初始化 marked 以应用新的样式
         this.footnotes = [];
         this.footnoteIndex = 0;
@@ -79,16 +78,6 @@ export class MarkdownService {
             <style>
                 .hljs.code__pre > .mac-sign {
                     display: flex;
-                }
-                .code__pre {
-                    padding: 0 !important;
-                }
-                .hljs.code__pre code {
-                    display: -webkit-box;
-                    padding: 0.5em 1em 1em;
-                    overflow-x: auto;
-                    text-indent: 0;
-                    white-space: nowrap;
                 }
             </style>
         ` : '';
@@ -320,7 +309,6 @@ export class MarkdownService {
             <body><div style="width: 750px; margin: auto;">${htmlStr}</div></body></html>`;
     }
 
-    // Public methods
     public async render(markdown: string): Promise<string> {
         const { markdownContent } = this.parseFrontMatterAndContent(markdown);
         let outputTemp = await marked(markdownContent);
@@ -335,6 +323,16 @@ export class MarkdownService {
         outputTemp += this.buildAddition();
         outputTemp += this.buildMacStyle();
         outputTemp = this.wrapWithContainer(outputTemp);
+        outputTemp += `<style>              .code__pre {
+                    padding: 0 !important;
+                }
+                .hljs.code__pre code {
+                    display: -webkit-box;
+                    padding: 0.5em 1em 1em;
+                    overflow-x: auto;
+                    text-indent: 0;
+                    white-space: nowrap;
+                }</style>`
         return this.exportHTML(outputTemp, this.opts.primaryColor || '');
     }
     private wrapWithContainer(content: string): string {
