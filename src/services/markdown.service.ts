@@ -12,7 +12,6 @@ import frontMatter from 'front-matter';
 export class MarkdownService {
     private static instance: MarkdownService;
     private footnotes: [number, string, string][] = [];
-    private footnoteIndex: number = 0;
     private styleMapping: ThemeStyles;
     private codeIndex: number = 0;
     private listIndex: number = 0;
@@ -68,7 +67,6 @@ export class MarkdownService {
         this.styleMapping = this.buildTheme(options);
         this.initializeMarked(); // 重新初始化 marked 以应用新的样式
         this.footnotes = [];
-        this.footnoteIndex = 0;
         this.codeIndex = 0;
         this.listIndex = 0;
     }
@@ -77,7 +75,7 @@ export class MarkdownService {
         return this.opts.isMacStyle ? `
             <style>
                 .hljs.code__pre > .mac-sign {
-                    display: flex;
+                    
                 }
             </style>
         ` : '';
@@ -194,7 +192,7 @@ export class MarkdownService {
         if (lang.startsWith('mermaid')) {
             return mermaidRenderer(text, this.codeIndex++);
         }
-        return codeRenderer(text, lang, this.styleMapping);
+        return codeRenderer(text, lang, this.styleMapping, this.opts.isMacStyle == true);
     }
 
     private linkRenderer({ href, title, text, tokens }: Tokens.Link): string {
@@ -321,18 +319,8 @@ export class MarkdownService {
 
         // 附加的一些 style
         outputTemp += this.buildAddition();
-        outputTemp += this.buildMacStyle();
+        // outputTemp += this.buildMacStyle();
         outputTemp = this.wrapWithContainer(outputTemp);
-        outputTemp += `<style>              .code__pre {
-                    padding: 0 !important;
-                }
-                .hljs.code__pre code {
-                    display: -webkit-box;
-                    padding: 0.5em 1em 1em;
-                    overflow-x: auto;
-                    text-indent: 0;
-                    white-space: nowrap;
-                }</style>`
         return this.exportHTML(outputTemp, this.opts.primaryColor || '');
     }
     private wrapWithContainer(content: string): string {

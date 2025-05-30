@@ -10,7 +10,7 @@ const macCodeSvg = `
 </svg>
 `.trim();
 
-export function codeRenderer(text: string, lang: string, styleMapping: ThemeStyles): string {
+export function codeRenderer(text: string, lang: string, styleMapping: ThemeStyles, isMacStyle: boolean): string {
     const langText = lang.split(' ')[0];
     const language = hljs.getLanguage(langText) ? langText : 'plaintext';
     let highlighted = hljs.highlight(text, { language }).value;
@@ -18,7 +18,7 @@ export function codeRenderer(text: string, lang: string, styleMapping: ThemeStyl
     highlighted = formatCode(highlighted);
 
     // Add mac-style GUI and code wrapper
-    return wrapCodeBlock(highlighted, lang, styleMapping);
+    return wrapCodeBlock(highlighted, lang, styleMapping, isMacStyle);
 }
 
 function formatCode(code: string): string {
@@ -29,10 +29,14 @@ function formatCode(code: string): string {
         .replace(/(>[^<]+)|(^[^<]+)/g, str => str.replace(/\s/g, '&nbsp;'));
 }
 
-function wrapCodeBlock(code: string, lang: string, styleMapping: ThemeStyles): string {
-    const span = `<span class="mac-sign" style="padding: 10px 14px 0;" hidden>${macCodeSvg}</span>`;
+function wrapCodeBlock(code: string, lang: string, styleMapping: ThemeStyles, isMacStyle: boolean): string {
+    let macStyleAddition = ""
+    if (isMacStyle) {
+        macStyleAddition = "display: flex;"
+    }
+    const span = `<span class="mac-sign" style="padding: 10px 14px 0;${macStyleAddition}" hidden>${macCodeSvg}</span>`;
+    const addition = `;display: -webkit-box;padding: 0.5em 1em 1em;overflow-x: auto;text-indent: 0;white-space: nowrap;`
+    const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code', addition)}>${code}</code>`
 
-    const codeElement = `<code class="language-${lang}" ${getStyles(styleMapping, 'code')}>${code}</code>`
-
-    return `<pre class="hljs code__pre" ${getStyles(styleMapping, `.hljs`)}>${span}${codeElement}</pre>`;
+    return `<pre class="hljs code__pre" ${getStyles(styleMapping, `.hljs`, ";padding: 0 !important;")}>${span}${codeElement}</pre>`;
 } 

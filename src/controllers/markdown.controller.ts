@@ -10,7 +10,6 @@ import { theme } from '@/config/theme.js';
 import { fontFamily, fontSize, codeBlockTheme } from '@/config/style.js';
 import { FontFamilyLabel, FontSizeLabel } from '@/types/index.js';
 import { css2json, customCssWithTemplate, customizeTheme } from "@/utils/index.js"
-import { log } from 'console';
 
 export class MarkdownController {
     private static codeThemeStylesCache: Map<string, string> = new Map();
@@ -86,8 +85,6 @@ export class MarkdownController {
     }
 
     private async initializeMarkdownService(options: Partial<MarkdownToHtmlRequest>) {
-        console.log(options);
-
         // 处理字体参数
         let fontFamilyValue = config.fontFamily as FontFamilyLabel;
         if (options.fontFamily) {
@@ -111,7 +108,7 @@ export class MarkdownController {
             fonts: fontFamily(fontFamilyValue).value, // 字体
             size: fontSize(fontSizeValue).value,  // 字号
             isUseIndent: options.isUseIndent !== undefined ? options.isUseIndent : config.isUseIndent, // 是否使用缩进
-            isMacStyle: options.isMacCodeBlock, // 是否使用mac代码块
+            isMacStyle: !!options.isMacCodeBlock, // 是否使用mac代码块
             primaryColor: primaryColor,  // 主色调
             citeStatus: options.citeStatus !== undefined ? options.citeStatus : true,  // 是否启用引用
             legend: options.legend || config.legend,  // 图例
