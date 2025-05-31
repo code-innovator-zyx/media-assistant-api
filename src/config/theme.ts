@@ -232,6 +232,7 @@ const defaultTheme: Theme = {
       'background': `rgba(27,31,35,.05)`,
       'padding': `3px 5px`,
       'border-radius': `4px`,
+      'background-color': 'white',
       // 'word-break': `break-all`,
     },
 
